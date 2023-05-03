@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Home</title>
+    <title>Update Table</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
@@ -30,10 +30,10 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a>Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="booking.html">Booking</a></li>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="admin-index.html">Admin Home</a></li>
+                            <li><a href="admin-menu.html">Menu</a></li>
+                            <li><a href="admin-table.html">Table</a></li>
+                            <li><a>User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -43,61 +43,37 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Main Banner Area Start ***** -->
-    <div id="top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="left-content">
-                        <div class="inner-content">
-                            <h4>KlassyCafe</h4>
-                            <h6>THE BEST EXPERIENCE</h6>
-                            <div class="main-white-button scroll-to-section">
-                                <a href="new-booking.html">Book A Table</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="item">
-                        <div class="img-fill">
-                            <img src="assets/images/slide-03.jpg" alt="">
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ***** Main Banner Area End ***** -->
-
-    <!-- ***** About Area Starts ***** -->
-    <section class="section" id="about">
+    <!-- ***** User List Area Starts ***** -->
+    <section class="section" id="about" style="margin-bottom: 100px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="left-text-content">
                         <div class="section-heading">
-                            <h6>About Us</h6>
-                            <h2>We Leave A Delicious Memory For You</h2>
+                            <h6>Admin</h6>
+                            <h2>Table In Restaurant</h2>
                         </div>
-                        <p>Welcome to Klassy Cafe, a cozy and elegant restaurant located in the heart of the city. Our team is passionate about creating a memorable dining experience for our guests, and we take pride in every detail, from the quality of our ingredients to the attentive service we provide.</p>
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-01.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-02.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-03.jpg" alt="">
-                            </div>
+                        <div>
+                            <h3>Update Table</h3><br>
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Name*</label>
+                                    <input class="form-control" id="name" type="text" required name="name" value="A1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="number">Number*</label>
+                                    <input class="form-control" id="number" type="number" required name="number" value="2">
+                                </div>
+                                
+                                <input class="btn btn-outline-secondary" type="submit" value="Update">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ***** About Area Ends ***** -->
+    <!-- ***** User List Area Ends ***** -->
                                          
     <!-- ***** Footer Start ***** -->
     <footer>
