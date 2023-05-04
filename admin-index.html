@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Booking</title>
+    <title>Admin Home</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
@@ -30,10 +30,10 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index-after-login.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a>Booking</a></li>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a>Admin Home</a></li>
+                            <li><a href="admin-menu.html">Menu</a></li>
+                            <li><a href="admin-table.html">Table</a></li>
+                            <li><a href="admin-user.html">User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -43,55 +43,85 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
+    <!-- ***** Main Banner Area Start ***** -->
+    <div id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="left-content">
+                        <div class="inner-content">
+                            <h4>KlassyCafe</h4>
+                            <h6>EVERTHING IS UNDER CONTROL</h6>
+                            <div class="main-white-button scroll-to-section">
+                                <a href="#orders">Customer Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="item">
+                        <div class="img-fill">
+                            <img src="assets/images/slide-01.jpg" alt="">
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
     <!-- ***** Booking List Area Starts ***** -->
-    <section class="section" id="about" style="margin-bottom: 120px">
+    <section class="section" id="orders" style="margin-top: 50px;margin-bottom: 100px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="left-text-content">
                         <div class="section-heading">
-                            <h6>History Booking</h6>
-                            <h2>We Leave A Delicious Memory For You</h2>
+                            <h6>Admin</h6>
+                            <h2>Customer Booking</h2>
                         </div>
                         <table class="table">
+                            <caption>
+                                <button type="button" class="btn btn-outline-secondary" onclick="accept()">Accept</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="denied()">Denied</button>
+                            </caption>
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Time</th>
                                 <th scope="col">Table</th>
                                 <th scope="col">Menu</th>
+                                <th scope="col">Status</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row">1</th>
+                                <td><input type='checkbox'></td>
                                 <td>19:00 3 May 2023</td>
                                 <td>A1</td>
                                 <td>Fresh Chicken Salad, Eggs Omelette, Orange Juice</td>
+                                <td><span>Accept</span></td>
                               </tr>
                               <tr>
-                                <th scope="row">2</th>
+                                <td><input type='checkbox'></td>
                                 <td>21:00 4 May 2023</td>
                                 <td>A3</td>
                                 <td>Dollma Pire, Orange Juice</td>
+                                <td><span>Pending</span></td>
                               </tr>
                               <tr>
-                                <th scope="row">3</th>
+                                <td><input type='checkbox'></td>
                                 <td>19:00 5 May 2023</td>
                                 <td>B1</td>
                                 <td>Fresh Chicken Salad, Orange Juice</td>
+                                <td><span>Denied</span></td>
                               </tr>
                               <tr>
-                                <th scope="row">4</th>
+                                <td><input type='checkbox'></td>
                                 <td>12:00 7 May 2023</td>
                                 <td>A1</td>
                                 <td>Omelette & Cheese, Fruit Salad</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>19:00 8 May 2023</td>
-                                <td>A3</td>
-                                <td>Eggs Omelette, Orange Juice</td>
+                                <td><span>Pending</span></td>
                               </tr>
                             </tbody>
                           </table>
@@ -101,9 +131,9 @@
         </div>
     </section>
     <!-- ***** Booking List Area Ends ***** -->
-
+                                         
     <!-- ***** Footer Start ***** -->
-    <footer style="margin-top: 0px;">
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
@@ -130,5 +160,30 @@
         </div>
     </footer>
     <!-- ***** Footer End ***** -->
+
+<script>
+    function accept() {
+        const tbodyElement = document.getElementsByTagName("tbody");
+        const trElements = tbodyElement[0].getElementsByTagName("tr");
+        for (let i = 0; i < trElements.length; i++) {
+            const inputElement = trElements[i].getElementsByTagName("input")[0];
+            if (inputElement.checked) {
+                trElements[i].getElementsByTagName("span")[0].innerHTML = "Accept";
+                inputElement.checked = false;
+            }
+        }
+    };
+
+    function denied() {
+        const tbodyElement = document.getElementsByTagName("tbody");
+        const trElements = tbodyElement[0].getElementsByTagName("tr");
+        for (let i = 0; i < trElements.length; i++) {
+            const inputElement = trElements[i].getElementsByTagName("input")[0];
+            if (inputElement.checked) {
+                trElements[i].getElementsByTagName("span")[0].innerHTML = "Denied";
+            }
+        }
+    };
+</script>
 </body>
 </html>

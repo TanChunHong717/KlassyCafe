@@ -8,13 +8,14 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Booking</title>
+    <title>Admin Table</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="assets/css/admin-table.css">
 </head>
 <body>        
     <!-- ***** Header Area Start ***** -->
@@ -30,10 +31,10 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index-after-login.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a>Booking</a></li>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="admin-index.html">Admin Home</a></li>
+                            <li><a href="admin-menu.html">Menu</a></li>
+                            <li><a>Table</a></li>
+                            <li><a href="admin-user.html">User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -43,55 +44,60 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Booking List Area Starts ***** -->
+    <!-- ***** User List Area Starts ***** -->
     <section class="section" id="about" style="margin-bottom: 120px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="left-text-content">
                         <div class="section-heading">
-                            <h6>History Booking</h6>
-                            <h2>We Leave A Delicious Memory For You</h2>
+                            <h6>Admin</h6>
+                            <h2>Table In Restaurant</h2>
                         </div>
+                        <div class="text-right" style="margin-bottom: 15px;"><a href="admin-add-table.html" class="btn btn-outline-secondary">Add Table</a></div>
                         <table class="table">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Table</th>
-                                <th scope="col">Menu</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Space</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <th scope="row">1</th>
-                                <td>19:00 3 May 2023</td>
+                                <td><img src="assets/images/table_2.jfif" alt=""></td>
                                 <td>A1</td>
-                                <td>Fresh Chicken Salad, Eggs Omelette, Orange Juice</td>
+                                <td>2</td>
+                                <td><a class="btn btn-outline-secondary" href="admin-table-update.html">Update</a></td>
+                                <td><a class="btn btn-outline-secondary" onclick="deleteTable()">Delete</a></td>
                               </tr>
                               <tr>
                                 <th scope="row">2</th>
-                                <td>21:00 4 May 2023</td>
-                                <td>A3</td>
-                                <td>Dollma Pire, Orange Juice</td>
+                                <td><img src="assets/images/table_2.jfif" alt=""></td>
+                                <td>A2</td>
+                                <td>2</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary" onclick="deleteTable()">Delete</a></td>
                               </tr>
                               <tr>
                                 <th scope="row">3</th>
-                                <td>19:00 5 May 2023</td>
+                                <td><img src="assets/images/table_4.jfif" alt=""></td>
                                 <td>B1</td>
-                                <td>Fresh Chicken Salad, Orange Juice</td>
+                                <td>4</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary" onclick="deleteTable()">Delete</a></td>
                               </tr>
                               <tr>
                                 <th scope="row">4</th>
-                                <td>12:00 7 May 2023</td>
-                                <td>A1</td>
-                                <td>Omelette & Cheese, Fruit Salad</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>19:00 8 May 2023</td>
-                                <td>A3</td>
-                                <td>Eggs Omelette, Orange Juice</td>
+                                <td><img src="assets/images/table_4.jfif" alt=""></td>
+                                <td>B2</td>
+                                <td>4</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary" onclick="deleteTable()">Delete</a></td>
                               </tr>
                             </tbody>
                           </table>
@@ -100,10 +106,10 @@
             </div>
         </div>
     </section>
-    <!-- ***** Booking List Area Ends ***** -->
-
+    <!-- ***** User List Area Ends ***** -->
+                                         
     <!-- ***** Footer Start ***** -->
-    <footer style="margin-top: 0px;">
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
@@ -130,5 +136,11 @@
         </div>
     </footer>
     <!-- ***** Footer End ***** -->
+
+    <script>
+        function deleteTable() {
+            alert("Do you want to deletet this table? All the order with this table will be also deleted");
+        };
+    </script>
 </body>
 </html>
