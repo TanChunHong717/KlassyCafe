@@ -67,10 +67,11 @@
                                     <label for="password">Password*</label>
                                     <input class="form-control" id="password" type="password" required name="password">
                                 </div>
-                                <input class="btn btn-light" type="submit" value="Log In">
+<!--                                <input id="user-log-in" class="btn btn-light" type="submit" value="Log In">-->
+                            <button id="user-login" class="btn btn-light">Log In</button>
                             </form>
                             <br>
-                            Not Have Account?
+                            Not Have Account?<br>
                             <a href="sign-up.html" style="color: white;"><u>Sign Up</u></a>
                         </div>
                     </div>
@@ -108,5 +109,12 @@
         </div>
     </footer>
     <!-- ***** Footer End ***** -->
+
+<script>
+    const userLoginBtn = document.querySelector("#user-login")
+    userLoginBtn.addEventListener('click', (e) =>{
+        window.location.href = "./index-after-login.html"
+    })
+</script>
 </body>
 </html>
