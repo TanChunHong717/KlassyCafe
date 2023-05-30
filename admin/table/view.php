@@ -1,3 +1,12 @@
+<?php 
+    include "../../config/database.php";
+    session_start();
+
+    if (!isset($_SESSION['admin'])) {
+        header("Location: ../../login.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +17,14 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Admin User</title>
+    <title>Admin Table</title>
     
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
-    <link rel="stylesheet" href="assets/css/owl-carousel.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="../../assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="../../assets/css/lightbox.css">
+    <link rel="stylesheet" href="../../assets/css/admin-table.css">
 </head>
 <body>        
     <!-- ***** Header Area Start ***** -->
@@ -24,16 +34,16 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/klassy-logo.png">
+                        <a href="../index.php" class="logo">
+                            <img src="../../assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="admin-index.html">Admin Home</a></li>
-                            <li><a href="admin-menu.html">Menu</a></li>
-                            <li><a href="admin-table.html">Table</a></li>
-                            <li><a>User</a></li>
+                            <li><a href="../index.php">Admin Home</a></li>
+                            <li><a href="../menu/view.php">Menu</a></li>
+                            <li><a>Table</a></li>
+                            <li><a href="../user/view.php">User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -51,52 +61,39 @@
                     <div class="left-text-content">
                         <div class="section-heading">
                             <h6>Admin</h6>
-                            <h2>Existing User</h2>
+                            <h2>Table In Restaurant</h2>
                         </div>
+                        <div class="text-right" style="margin-bottom: 15px;"><a href="add.php" class="btn btn-outline-secondary">Add Table</a></div>
                         <table class="table">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Mobile Number</th>
+                                <th scope="col">Space</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Tan Chun Hong</td>
-                                <td>tanchunhong717@gmail.com</td>
-                                <td>01110687471</td>
-                                <td><a class="btn btn-outline-secondary" href="admin-user-update.html">Update</a></td>
-                                <td><a class="btn btn-outline-secondary" onclick="deleteUser()">Delete</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Petter Griffin</td>
-                                <td>peterpumkin69@gmail.com</td>
-                                <td>03223434403</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary" onclick="deleteUser()">Delete</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Homor Sipsom</td>
-                                <td>homorS98@gmail.com</td>
-                                <td>01269785431</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary" onclick="deleteUser()">Delete</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>Stan Pines</td>
-                                <td>sp002liar@gmail.com</td>
-                                <td>01159215563</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary" onclick="deleteUser()">Delete</a></td>
-                              </tr>
+                                <?php 
+                                    $query = "SELECT * FROM `table`";
+                                    $result = $conn->query($query);
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<tr>
+                                        <td scope="row">'.$row['table_id'].'</td>
+                                        <td><img src="../../'.$row['table_image_path'].'" alt=""></td>
+                                        <td>'.$row['table_name'].'</td>
+                                        <td>'.$row['table_space'].'</td>
+                                        <td><a class="btn btn-outline-secondary" href="update.php?id='.$row['table_id'].'">Update</a></td>
+                                        <td><a class="btn btn-outline-secondary" onclick="deleteTable()" href="delete.php?id='.$row['table_id'].'">Delete</a></td>
+                                        </tr>
+                                        ';
+                                    }
+
+                                    $conn->close();
+                                ?>
                             </tbody>
                           </table>
                     </div>
@@ -136,8 +133,8 @@
     <!-- ***** Footer End ***** -->
 
     <script>
-        function deleteUser() {
-            alert("Do you want to deletet this user?");
+        function deleteTable() {
+            alert("Do you want to deletet this table? All the order with this table will be also deleted");
         };
     </script>
 </body>

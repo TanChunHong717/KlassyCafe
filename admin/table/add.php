@@ -1,3 +1,12 @@
+<?php 
+    include "../../config/database.php";
+    session_start();
+
+    if (!isset($_SESSION['admin'])) {
+        header("Location: ../../login.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +19,11 @@
 
     <title>Update Table</title>
     
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
-    <link rel="stylesheet" href="assets/css/owl-carousel.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="../../assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="../../assets/css/lightbox.css">
 </head>
 <body>        
     <!-- ***** Header Area Start ***** -->
@@ -24,16 +33,16 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/klassy-logo.png">
+                        <a href="../index.php" class="logo">
+                            <img src="../../assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="admin-index.html">Admin Home</a></li>
-                            <li><a href="admin-menu.html">Menu</a></li>
-                            <li><a href="admin-table.html">Table</a></li>
-                            <li><a>User</a></li>
+                            <li><a href="../index.php">Admin Home</a></li>
+                            <li><a href="../menu/view.php">Menu</a></li>
+                            <li><a href="view.php">Table</a></li>
+                            <li><a href="../user/view.php">User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -55,10 +64,10 @@
                         </div>
                         <div>
                             <h3>Update Table</h3><br>
-                            <form>
-                                <label>Image*</label>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+                                <label>Image</label>
                                 <div class="custom-file" style="margin-bottom: 15px;">
-                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <input type="file" class="custom-file-input" id="customFile" name="customFile">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <div class="form-group">
@@ -69,7 +78,42 @@
                                     <label for="number">Number*</label>
                                     <input class="form-control" id="number" type="number" required name="number">
                                 </div>
-                                
+                                <?php 
+                                    $targetFilePath = 'NULL';
+                                    if(isset($_FILES['customFile'])) {
+                                        $file = $_FILES['customFile'];
+                                        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+                                        $maxFileSize = 2 * 1024 * 1024;
+                                        
+                                        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                                        if (!in_array($extension, $allowedExtensions)) {
+                                            echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
+                                            exit;
+                                        }
+                                        if ($file['size'] > $maxFileSize) {
+                                            echo "File size exceeds the limit of 2MB.";
+                                            exit;
+                                        }
+
+                                        $targetDirectory = 'assets/uploads/';
+                                        $targetFilePath = $targetDirectory . basename($file['name']);
+                                        move_uploaded_file($file['tmp_name'], $targetFilePath);
+                                    } 
+                                    if(isset($_POST['name']) && isset($_POST['number'])) {
+                                        $name = $_POST['name'];
+                                        $number = $_POST['number'];
+                                        
+                                        $query = "INSERT INTO `table` VALUES (DEFAULT, '$name', '$number', '$targetFilePath')";
+                                        $result = $conn->query($query);
+                                                
+                                        if ($result) {
+                                            header("Location: view.php");
+                                            exit();
+                                        } else {
+                                            echo "Error executing INSERT query: " . $conn->error;
+                                        } 
+                                    }
+                                ?>
                                 <input class="btn btn-outline-secondary" type="submit" value="Update">
                             </form>
                         </div>

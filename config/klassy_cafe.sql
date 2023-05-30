@@ -15,32 +15,16 @@ CREATE SCHEMA IF NOT EXISTS `klassy_cafe` DEFAULT CHARACTER SET utf8 ;
 USE `klassy_cafe` ;
 
 -- -----------------------------------------------------
--- Table `klassy_cafe`.`category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `klassy_cafe`.`category` (
-  `category_id` INT NOT NULL,
-  `category_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`category_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `klassy_cafe`.`menu`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `klassy_cafe`.`menu` (
   `menu_id` INT NOT NULL AUTO_INCREMENT,
   `menu_name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(250) NULL,
-  `category` INT NOT NULL,
+  `category` VARCHAR(45) NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `menu_image_path` VARCHAR(100) NULL,
-  PRIMARY KEY (`menu_id`),
-  INDEX `fk_menu_category_idx` (`category` ASC) VISIBLE,
-  CONSTRAINT `fk_menu_category`
-    FOREIGN KEY (`category`)
-    REFERENCES `klassy_cafe`.`category` (`category_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`menu_id`))
 ENGINE = InnoDB;
 
 
@@ -65,7 +49,9 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`user` (
   `password` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `mobile_number` VARCHAR(15) NULL,
-  PRIMARY KEY (`user_id`))
+  `is_admin` TINYINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -78,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`order` (
   `table_id` INT NOT NULL,
   `order_amount` DECIMAL(10,2) NOT NULL,
   `order_date` DATETIME NOT NULL,
+  `status` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_order_user_idx` (`user_id` ASC) VISIBLE,
   INDEX `fk_order_table_idx` (`table_id` ASC) VISIBLE,

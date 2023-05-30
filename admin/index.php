@@ -1,3 +1,12 @@
+<?php 
+    include "../config/database.php";
+    session_start();
+
+    if (!isset($_SESSION['admin'])) {
+        header("Location: ../login.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +19,11 @@
 
     <title>Admin Home</title>
     
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
-    <link rel="stylesheet" href="assets/css/owl-carousel.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="../assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="../assets/css/lightbox.css">
 </head>
 <body>        
     <!-- ***** Header Area Start ***** -->
@@ -24,16 +33,16 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/klassy-logo.png">
+                        <a href="#" class="logo">
+                            <img src="../assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a>Admin Home</a></li>
-                            <li><a href="admin-menu.html">Menu</a></li>
-                            <li><a href="admin-table.html">Table</a></li>
-                            <li><a href="admin-user.html">User</a></li>
+                            <li><a href="menu/view.php">Menu</a></li>
+                            <li><a href="table/view.php">Table</a></li>
+                            <li><a href="user/view.php">User</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -61,7 +70,7 @@
                 <div class="col-lg-8">
                     <div class="item">
                         <div class="img-fill">
-                            <img src="assets/images/slide-01.jpg" alt="">
+                            <img src="../assets/images/slide-01.jpg" alt="">
                         </div>
                       </div>
                 </div>
@@ -80,51 +89,44 @@
                             <h6>Admin</h6>
                             <h2>Customer Booking</h2>
                         </div>
-                        <table class="table">
-                            <caption>
-                                <button type="button" class="btn btn-outline-secondary" onclick="accept()">Accept</button>
-                                <button type="button" class="btn btn-outline-secondary" onclick="denied()">Denied</button>
-                            </caption>
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Table</th>
-                                <th scope="col">Menu</th>
-                                <th scope="col">Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td><input type='checkbox'></td>
-                                <td>19:00 3 May 2023</td>
-                                <td>A1</td>
-                                <td>Fresh Chicken Salad, Eggs Omelette, Orange Juice</td>
-                                <td><span>Accept</span></td>
-                              </tr>
-                              <tr>
-                                <td><input type='checkbox'></td>
-                                <td>21:00 4 May 2023</td>
-                                <td>A3</td>
-                                <td>Dollma Pire, Orange Juice</td>
-                                <td><span>Pending</span></td>
-                              </tr>
-                              <tr>
-                                <td><input type='checkbox'></td>
-                                <td>19:00 5 May 2023</td>
-                                <td>B1</td>
-                                <td>Fresh Chicken Salad, Orange Juice</td>
-                                <td><span>Denied</span></td>
-                              </tr>
-                              <tr>
-                                <td><input type='checkbox'></td>
-                                <td>12:00 7 May 2023</td>
-                                <td>A1</td>
-                                <td>Omelette & Cheese, Fruit Salad</td>
-                                <td><span>Pending</span></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                        <form id="form" method="post">
+                            <table class="table">
+                                <caption>
+                                    <input type="submit" value="Accept" onclick="setAction('order/accept.php')">
+                                    <input type="submit" value="Denied" onclick="setAction('order/denied.php')">
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Table</th>
+                                        <th scope="col">Menu</th>
+                                        <th scope="col">Amount(RM)</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = "SELECT `order`.order_id, order_date, table_name, `status`, order_amount,GROUP_CONCAT(menu_name) AS menu FROM `order` JOIN `table` USING (table_id) JOIN contain USING (order_id) JOIN menu USING (menu_id) GROUP BY order_id";
+                                        $result = $conn->query($query);
+
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<tr>
+                                            <td><input type="checkbox" name="checkboxes[]" value="'.$row['order_id'].'"></td>
+                                            <td>'.$row['order_date'].'</td>
+                                            <td>'.$row['table_name'].'</td>
+                                            <td>'.$row['menu'].'</td>
+                                            <td>'.$row['order_amount'].'</td>
+                                            <td><span>'.$row['status'].'</span></td>
+                                            </tr>
+                                            ';
+                                        }
+    
+                                        $conn->close();
+                                    ?>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -162,28 +164,9 @@
     <!-- ***** Footer End ***** -->
 
 <script>
-    function accept() {
-        const tbodyElement = document.getElementsByTagName("tbody");
-        const trElements = tbodyElement[0].getElementsByTagName("tr");
-        for (let i = 0; i < trElements.length; i++) {
-            const inputElement = trElements[i].getElementsByTagName("input")[0];
-            if (inputElement.checked) {
-                trElements[i].getElementsByTagName("span")[0].innerHTML = "Accept";
-                inputElement.checked = false;
-            }
-        }
-    };
-
-    function denied() {
-        const tbodyElement = document.getElementsByTagName("tbody");
-        const trElements = tbodyElement[0].getElementsByTagName("tr");
-        for (let i = 0; i < trElements.length; i++) {
-            const inputElement = trElements[i].getElementsByTagName("input")[0];
-            if (inputElement.checked) {
-                trElements[i].getElementsByTagName("span")[0].innerHTML = "Denied";
-            }
-        }
-    };
+  function setAction(action) {
+    document.getElementById('form').action = action;
+  }
 </script>
 </body>
 </html>
