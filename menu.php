@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +37,9 @@
                             // Check if the user is logged in
                             if (isset($_SESSION['user_id'])) {
                                 // User is logged in
-                                echo '<li><a href="logout.php">Log Out</a></li>';
+                                echo '<li><a href="booking.php">Booking</a></li>';
                                 echo '<li><a href="profile.php">Profile</a></li>';
+                                echo '<li><a href="logout.php">Log Out</a></li>';
                             } else {
                                 // User is not logged in
                                 echo '<li><a href="login.php">Log In</a></li>';
