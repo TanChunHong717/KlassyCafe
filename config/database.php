@@ -1,6 +1,6 @@
 <?php 
     $username = "root"; 
-    $password = "1234"; 
+    $password = ""; 
     $database = "klassy_cafe"; 
     $conn = new mysqli("localhost", $username, $password, $database); 
 

@@ -43,6 +43,7 @@
                             <li><a href="../menu/view.php">Menu</a></li>
                             <li><a href="view.php">Table</a></li>
                             <li><a href="../user/view.php">User</a></li>
+                            <li><a href="../../logout.php">logout</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>

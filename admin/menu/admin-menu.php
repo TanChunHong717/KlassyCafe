@@ -57,6 +57,7 @@
                         <li><a>Menu</a></li>
                         <li><a href="admin-table.html">Table</a></li>
                         <li><a href="admin-user.html">User</a></li>
+                        <li><a href="../../logout.php">logout</a></li>
                     </ul>
                     <!-- ***** Menu End ***** -->
                 </nav>

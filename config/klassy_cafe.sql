@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`user` (
   `mobile_number` VARCHAR(15) NULL,
   `is_admin` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`order` (
   `order_date` DATETIME NOT NULL,
   `status` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`order_id`),
-  INDEX `fk_order_user_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_order_table_idx` (`table_id` ASC) VISIBLE,
+  INDEX `fk_order_user_idx` (`user_id` ASC),
+  INDEX `fk_order_table_idx` (`table_id` ASC),
   CONSTRAINT `fk_order_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `klassy_cafe`.`user` (`user_id`)
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`contain` (
   `order_id` INT NOT NULL,
   `menu_id` INT NOT NULL,
   PRIMARY KEY (`order_id`, `menu_id`),
-  INDEX `fk_contain_menu_idx` (`menu_id` ASC) VISIBLE,
+  INDEX `fk_contain_menu_idx` (`menu_id` ASC),
   CONSTRAINT `fk_contain_order`
     FOREIGN KEY (`order_id`)
     REFERENCES `klassy_cafe`.`order` (`order_id`)

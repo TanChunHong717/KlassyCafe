@@ -1,3 +1,57 @@
+<?php 
+  include "config/database.php";
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    require_once("config/database.php");
+
+    // Initialize variables
+    $name = $email = $mobileNumber = $password = $confirmPassword = '';
+    $error = '';
+
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        // Retrieve form data
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $mobileNumber = $_POST["mobile-number"];
+        $password = $_POST["password"];
+        $confirmPassword = $_POST["password-repeat"];
+
+        // Validate form data
+        if (empty($name) || empty($email) || empty($mobileNumber) || empty($password) || empty($confirmPassword)) {
+            $error = "All fields are required.";
+        } elseif ($password !== $confirmPassword) {
+            $error = "Passwords do not match.";
+        } else {
+            // Check if the email is already registered
+            $query = "SELECT * FROM user WHERE email = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $error = "Email is already registered.";
+            } else {
+                // Insert the new user into the database
+               
+                $insertQuery = "INSERT INTO user (name, email, mobile_number, password) VALUES (?, ?, ?, ?)";
+                $insertStmt = $conn->prepare($insertQuery);
+                $insertStmt->bind_param("ssss", $name, $email, $mobileNumber, $password);
+                $insertStmt->execute();
+
+                // Check if the insertion was successful
+                if ($insertStmt->affected_rows > 0) {
+                    // Registration successful, redirect to index page
+                    header("Location: login.php");
+                    exit();
+                } else {
+                    $error = "Registration failed. Please try again.";
+                }
+            }
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +112,10 @@
                     <div class="left-content">
                         <div class="inner-content" style="color: white; margin-top: 40px;">
                             <h3>Sign Up</h3><br>
-                            <form>
+                            <?php if (!empty($error)) : ?>
+                                <p style="color: white;"><?php echo $error; ?></p>
+                            <?php endif; ?>
+                            <form  action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                                 <div class="form-group">
                                     <label for="name">Name*</label>
                                     <input class="form-control" id="name" type="text" required name="name">
@@ -83,7 +140,7 @@
                             </form>
                             <br>
                             Already Have Account?
-                            <a href="login.html" style="color: white;"><u>Log In</u></a>
+                            <a href="login.php" style="color: white;"><u>Log In</u></a>
                         </div>
                     </div>
                 </div>
