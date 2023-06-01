@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +25,15 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
+                        <a href="index.php" class="logo">
                             <img src="assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a>Log In</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="menu.php">Menu</a></li>
+                            <li><a href="sign-up.php">Sign Up</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -58,7 +58,7 @@
                     <div class="left-content">
                         <div class="inner-content" style="color: white;">
                             <h3>Log In</h3><br>
-                            <form>
+                            <form action="authenticate_user.php" method="post">
                                 <div class="form-group">
                                     <label for="email">Email*</label>
                                     <input class="form-control" id="email" type="email" required name="email">
@@ -69,10 +69,17 @@
                                 </div>
 <!--                                <input id="user-log-in" class="btn btn-light" type="submit" value="Log In">-->
                             <button id="user-login" class="btn btn-light">Log In</button>
+                            <?php
+                                // Check if an error message is set
+                                if (isset($_GET['error'])) {
+                                    $errorMessage = $_GET['error'];
+                                    echo '<p class="error-message">' . $errorMessage . '</p>';
+                                }
+                            ?>
                             </form>
                             <br>
                             Not Have Account?<br>
-                            <a href="sign-up.html" style="color: white;"><u>Sign Up</u></a>
+                            <a href="sign-up.php" style="color: white;"><u>Sign Up</u></a>
                         </div>
                     </div>
                 </div>
@@ -109,12 +116,13 @@
         </div>
     </footer>
     <!-- ***** Footer End ***** -->
-
+<!--
 <script>
     const userLoginBtn = document.querySelector("#user-login")
     userLoginBtn.addEventListener('click', (e) =>{
         window.location.href = "./index-after-login.html"
     })
 </script>
+-->
 </body>
 </html>

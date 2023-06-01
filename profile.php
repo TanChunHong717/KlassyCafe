@@ -1,3 +1,22 @@
+<?php 
+  require_once("customer_session_validation.php");
+  include_once ("config/database.php");
+  $userid=$_SESSION["user_id"];
+  $name = $email = $mobileNumber = $isAdmin = '';
+// Prepare and execute the query to fetch user details
+  $query = "SELECT * FROM user WHERE user_id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("i", $userid);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  if ($result->num_rows === 1) {
+    $userData = $result->fetch_assoc();  
+    $email = $userData["email"];
+    $name = $userData["name"];
+    $mobileNumber = $userData["mobile_number"];
+    $isAdmin = $userData["is_admin"];
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,10 +51,11 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index-after-login.html">Home</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="booking.html">Booking</a></li>
-                        <li><a>Profile</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="menu.php">Menu</a></li>
+                        <li><a href="booking.php">Booking</a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="logout.php">Log out</a></li>
                     </ul>
                     <!-- ***** Menu End ***** -->
                 </nav>
@@ -53,28 +73,36 @@
                 <div class="left-content">
                     <div class="inner-content" style="color: white; margin-top: 50px;">
                         <h3>Profile</h3><br>
-                        <form>
+                        <form autocomplete="off" method="post" action="update_profile.php">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input class="form-control" id="name" type="text" required name="name"
-                                       value="Tan Chun Hong">
+                                       value="<?php echo $name; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input class="form-control" id="email" type="email" required name="email"
-                                       value="tanchunhong717@gmail.com">
+                                       value="<?php echo $email; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="mobile-number">Mobile Number</label>
                                 <input class="form-control" id="mobile-number" type="text" required name="mobile-number"
-                                       value="01110687471">
+                                       value="<?php echo $mobileNumber; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input class="form-control" id="password" type="password" required name="password">
+                                <input class="form-control" id="password" type="password" required name="password" value="">
                                 <small class="form-text text-muted">Enter the password to update your profile</small>
                             </div>
+                            
                             <input class="form-control" class="btn btn-light" type="submit" value="Update"><br>
+                            <?php
+                                // Check if an error message is set
+                                if (isset($_GET['msg'])) {
+                                    $message = $_GET['msg'];
+                                    echo '<p class="message">' . $message . '</p>';
+                                }
+                            ?>
                             <button class="btn btn-light" id="delete-account" style="width: 200px">Delete Account</button>
                         </form>
                     </div>
@@ -127,7 +155,7 @@
         if (!flag) {
             return false
         } else {
-            window.location.href = "index.html"
+            window.location.href = "delete_user_profile.php"
         }
     })
 </script>

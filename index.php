@@ -1,3 +1,8 @@
+<?php 
+    
+    require_once("customer_session_validation.php")
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>New Reservation</title>
+    <title>Home</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
@@ -31,10 +35,11 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="booking.html">Booking</a></li>
-                            <li><a href="profile.html">Profile</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="menu.php">Menu</a></li>
+                        <li><a href="booking.php">Booking</a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="logout.php">Log out</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -44,58 +49,64 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Form Area Start ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
     <div id="top">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-4">
+                    <div class="left-content">
+                        <div class="inner-content">
+                            <h4>KlassyCafe</h4>
+                            <h6>THE BEST EXPERIENCE</h6>
+                            <div class="main-white-button scroll-to-section">
+                                <a href="new-booking.php">Book A Table</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="item">
                         <div class="img-fill">
-                            <img src="assets/images/slide-01.jpg" alt="">
+                            <img src="assets/images/slide-03.jpg" alt="">
                         </div>
                       </div>
                 </div>
-                <div class="col-lg-4  col-xs-12">
-                    <div class="left-content">
-                        <div class="inner-content" style="color: white;">
-                            <h3>New Reservation</h3><br>
-                            <form>
-                                <div class="form-group">
-                                    <label for="time">Time*</label>
-                                    <input class="form-control" id="time" type="time" required name="time">
-                                </div>
-                                <div class="form-group">
-                                    <label for="table">Table*</label>
-                                    <select class="custom-select" id="table" required>
-                                        <option selected>Open this to select table</option>
-                                        <option value="1">A1</option>
-                                        <option value="2">B1</option>
-                                        <option value="3">B2</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="menu">Menu</label>
-                                    <select class="selectpicker" multiple data-live-search="true" id="menu">
-                                        <option value="1">Fresh Chicken Salad</option>
-                                        <option value="2">Eggs Omelette</option>
-                                        <option value="3">Orange Juice</option>
-                                        <option value="4">Dollma Pire</option>
-                                        <option value="5">Fruit Salad</option>
-                                        <option value="6">Omelette & Cheese</option>
-                                    </select>
-                                </div>
-                                <input class="btn btn-light" type="submit" value="Submit">
-                            </form>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** About Area Starts ***** -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="left-text-content">
+                        <div class="section-heading">
+                            <h6>About Us</h6>
+                            <h2>We Leave A Delicious Memory For You</h2>
+                        </div>
+                        <p>Welcome to Klassy Cafe, a cozy and elegant restaurant located in the heart of the city. Our team is passionate about creating a memorable dining experience for our guests, and we take pride in every detail, from the quality of our ingredients to the attentive service we provide.</p>
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="assets/images/about-thumb-01.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img src="assets/images/about-thumb-02.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img src="assets/images/about-thumb-03.jpg" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ***** Form Area End ***** -->
-
+    </section>
+    <!-- ***** About Area Ends ***** -->
+                                         
     <!-- ***** Footer Start ***** -->
-    <footer style="margin-top: 0px;">
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
@@ -122,9 +133,5 @@
         </div>
     </footer>
     <!-- ***** Footer End ***** -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>    
 </body>
 </html>

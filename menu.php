@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +25,27 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
+                        <a href="index.php" class="logo">
                             <img src="assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a>Menu</a></li>
-                            <li><a href="login.html">Log In</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="menu.php">Menu</a></li>
+                            <?php
+                            session_start();
+                            // Check if the user is logged in
+                            if (isset($_SESSION['user_id'])) {
+                                // User is logged in
+                                echo '<li><a href="logout.php">Log Out</a></li>';
+                                echo '<li><a href="profile.php">Profile</a></li>';
+                            } else {
+                                // User is not logged in
+                                echo '<li><a href="login.php">Log In</a></li>';
+                                echo '<li><a href="sign-up.php">Sign Up</a></li>';
+                            }
+                            ?>
                         </ul>      
                         <!-- ***** Menu End ***** -->    
                     </nav>

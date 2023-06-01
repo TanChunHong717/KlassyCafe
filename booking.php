@@ -1,3 +1,8 @@
+<?php 
+    
+    require_once("customer_session_validation.php")
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Home</title>
+    <title>Booking</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
@@ -24,16 +29,17 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
+                        <a href="index.php" class="logo">
                             <img src="assets/images/klassy-logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a>Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="login.html">Log In</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="menu.php">Menu</a></li>
+                        <li><a href="booking.php">Booking</a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="logout.php">Log out</a></li>
                         </ul>        
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -53,7 +59,7 @@
                             <h4>KlassyCafe</h4>
                             <h6>THE BEST EXPERIENCE</h6>
                             <div class="main-white-button scroll-to-section">
-                                <a href="login.html">Book A Table</a>
+                                <a href="new-booking.html">Book A Table</a>
                             </div>
                         </div>
                     </div>
@@ -61,7 +67,7 @@
                 <div class="col-lg-8">
                     <div class="item">
                         <div class="img-fill">
-                            <img src="assets/images/slide-03.jpg" alt="">
+                            <img height="1000" src="assets/images/slide-05.avif" alt="">
                         </div>
                       </div>
                 </div>
@@ -70,37 +76,79 @@
     </div>
     <!-- ***** Main Banner Area End ***** -->
 
-    <!-- ***** About Area Starts ***** -->
-    <section class="section" id="about">
+    <!-- ***** Booking List Area Starts ***** -->
+    <section class="section" id="about" style="margin-bottom: 120px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="left-text-content">
                         <div class="section-heading">
-                            <h6>About Us</h6>
+                            <h6>History Booking</h6>
                             <h2>We Leave A Delicious Memory For You</h2>
                         </div>
-                        <p>Welcome to Klassy Cafe, a cozy and elegant restaurant located in the heart of the city. Our team is passionate about creating a memorable dining experience for our guests, and we take pride in every detail, from the quality of our ingredients to the attentive service we provide.</p>
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-01.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-02.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/about-thumb-03.jpg" alt="">
-                            </div>
-                        </div>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Table</th>
+                                <th scope="col">Menu</th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>19:00 3 May 2023</td>
+                                <td>A1</td>
+                                <td>Fresh Chicken Salad, Eggs Omelette, Orange Juice</td>
+                                <td></td>
+                                <td>Cancel</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>21:00 4 May 2023</td>
+                                <td>A3</td>
+                                <td>Dollma Pire, Orange Juice</td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>19:00 5 May 2023</td>
+                                <td>B1</td>
+                                <td>Fresh Chicken Salad, Orange Juice</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">4</th>
+                                <td>12:00 7 May 2023</td>
+                                <td>A1</td>
+                                <td>Omelette & Cheese, Fruit Salad</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">5</th>
+                                <td>19:00 8 May 2023</td>
+                                <td>A3</td>
+                                <td>Eggs Omelette, Orange Juice</td>
+                                <td><a class="btn btn-outline-secondary">Update</a></td>
+                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
+                              </tr>
+                            </tbody>
+                          </table>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ***** About Area Ends ***** -->
-                                         
+    <!-- ***** Booking List Area Ends ***** -->
+
     <!-- ***** Footer Start ***** -->
-    <footer>
+    <footer style="margin-top: 0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
