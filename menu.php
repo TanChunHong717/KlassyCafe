@@ -83,12 +83,9 @@
                                             <div class="row">
                                                 <div class="left-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
+                                                    include "config/database.php";
                                                     $query = "SELECT * FROM menu WHERE category = 'breakfast'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -108,7 +105,6 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
                                                     ?>
                                                 </div>
                                             </div>
@@ -117,12 +113,8 @@
                                             <div class="row">
                                                 <div class="right-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
                                                     $query = "SELECT * FROM menu WHERE category = 'breakfast'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -142,7 +134,6 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
                                                     ?>
                                                 </div>
                                             </div>
@@ -157,12 +148,8 @@
                                             <div class="row">
                                                 <div class="left-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
                                                     $query = "SELECT * FROM menu WHERE category = 'lunch'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -182,7 +169,6 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
                                                     ?>
                                                 </div>
                                             </div>
@@ -191,12 +177,8 @@
                                             <div class="row">
                                                 <div class="right-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
                                                     $query = "SELECT * FROM menu WHERE category = 'lunch'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -216,7 +198,6 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
                                                     ?>
                                                 </div>
                                             </div>
@@ -231,12 +212,8 @@
                                             <div class="row">
                                                 <div class="left-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
                                                     $query = "SELECT * FROM menu WHERE category = 'dinner'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -256,7 +233,6 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
                                                     ?>
                                                 </div>
                                             </div>
@@ -265,12 +241,8 @@
                                             <div class="row">
                                                 <div class="right-list">
                                                     <?php
-                                                    $username = "root";
-                                                    $password = "";
-                                                    $database = "klassy_cafe";
-                                                    $connection = new mysqli("localhost", $username, $password, $database);
                                                     $query = "SELECT * FROM menu WHERE category = 'dinner'";
-                                                    $result = mysqli_query($connection, $query);
+                                                    $result = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -290,7 +262,7 @@
                                                     } else {
                                                         echo "No menu items available.";
                                                     }
-                                                    mysqli_close($connection);
+                                                    mysqli_close($conn);
                                                     ?>
                                                 </div>
                                             </div>
