@@ -27,6 +27,25 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`menu` (
   PRIMARY KEY (`menu_id`))
 ENGINE = InnoDB;
 
+INSERT INTO `menu` (`menu_id`, `menu_name`, `description`, `category`, `price`, `menu_image_path`) VALUES
+(1, 'Fresh Chicken Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 10.50, 'assets/images/tab-item-01.png'),
+(2, 'Orange Juice', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 8.50, 'assets/images/tab-item-02.png'),
+(3, 'Fruit Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 9.90, 'assets/images/tab-item-03.png'),
+(4, 'Eggs Omelette', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 6.50, 'assets/images/tab-item-04.png'),
+(5, 'Dollma Pire', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 5.00, 'assets/images/tab-item-05.png'),
+(6, 'Omelette & Cheese', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Breakfast', 4.10, 'assets/images/tab-item-06.png'),
+(7, 'Eggs Omelette', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 14.00, 'assets/images/tab-item-04.png'),
+(8, 'Dollma Pire', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 18.00, 'assets/images/tab-item-05.png'),
+(9, 'Omelette & Cheese', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 22.00, 'assets/images/tab-item-06.png'),
+(10, 'Fresh Chicken Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 10.00, 'assets/images/tab-item-01.png'),
+(11, 'Orange Juice', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 20.00, 'assets/images/tab-item-02.png'),
+(12, 'Fruit Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Lunch', 30.00, 'assets/images/tab-item-03.png'),
+(13, 'Fresh Chicken Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 10.50, 'assets/images/tab-item-01.png'),
+(14, 'Orange Juice', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 8.50, 'assets/images/tab-item-02.png'),
+(15, 'Fruit Salad', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 9.90, 'assets/images/tab-item-03.png'),
+(16, 'Eggs Omelette', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 6.50, 'assets/images/tab-item-04.png'),
+(17, 'Dollma Pire', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 5.00, 'assets/images/tab-item-05.png'),
+(18, 'Omelette & Cheese', 'Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.', 'Dinner', 4.10, 'assets/images/tab-item-06.png');
 
 -- -----------------------------------------------------
 -- Table `klassy_cafe`.`table`
