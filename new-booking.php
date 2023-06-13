@@ -1,7 +1,7 @@
-<?php 
-    
+<?php
+
     require_once("customer_session_validation.php")
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <title>New Reservation</title>
-    
+
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
-<body>        
+<body>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -41,7 +41,7 @@
                         <li><a href="booking.php">Booking</a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="logout.php">Log out</a></li>
-                        </ul>        
+                        </ul>
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -61,7 +61,7 @@
                         </div>
                       </div>
                 </div>
-                <div class="col-lg-4  col-xs-12">
+                <div class="col-lg-4 col-xs-12">
                     <div class="left-content">
                         <div class="inner-content" style="color: white;">
                             <h3>New Reservation</h3><br>
@@ -131,6 +131,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </body>
 </html>
