@@ -89,16 +89,14 @@
                                         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                                         if (!in_array($extension, $allowedExtensions)) {
                                             echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
-                                            exit;
                                         }
-                                        if ($file['size'] > $maxFileSize) {
+                                        else if ($file['size'] > $maxFileSize) {
                                             echo "File size exceeds the limit of 2MB.";
-                                            exit;
+                                        } else {
+                                            $targetDirectory = 'assets/uploads/';
+                                            $targetFilePath = $targetDirectory . basename($file['name']);
+                                            move_uploaded_file($file['tmp_name'], '../../'.$targetFilePath);
                                         }
-
-                                        $targetDirectory = 'assets/uploads/';
-                                        $targetFilePath = $targetDirectory . basename($file['name']);
-                                        move_uploaded_file($file['tmp_name'], $targetFilePath);
                                     } 
                                     if(isset($_POST['name']) && isset($_POST['number'])) {
                                         $name = $_POST['name'];
