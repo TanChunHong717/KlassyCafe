@@ -89,9 +89,11 @@
                                         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                                         if (!in_array($extension, $allowedExtensions)) {
                                             echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
+                                            exit;
                                         }
                                         else if ($file['size'] > $maxFileSize) {
                                             echo "File size exceeds the limit of 2MB.";
+                                            exit;
                                         } else {
                                             $targetDirectory = 'assets/uploads/';
                                             $targetFilePath = $targetDirectory . basename($file['name']);
@@ -106,7 +108,7 @@
                                         $result = $conn->query($query);
                                                 
                                         if ($result) {
-                                            header("Location: view.php");
+                                            echo '<script>window.location.href = "view.php";</script>';
                                             exit();
                                         } else {
                                             echo "Error executing INSERT query: " . $conn->error;
