@@ -1,4 +1,4 @@
-<?php 
+<?php
   include "config/database.php";
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once("config/database.php");
@@ -33,7 +33,7 @@
                 $error = "Email is already registered.";
             } else {
                 // Insert the new user into the database
-               
+
                 $insertQuery = "INSERT INTO user (name, email, mobile_number, password) VALUES (?, ?, ?, ?)";
                 $insertStmt = $conn->prepare($insertQuery);
                 $insertStmt->bind_param("ssss", $name, $email, $mobileNumber, $password);
@@ -63,14 +63,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <title>Sign Up</title>
-    
+
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
-<body>        
+<body>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -88,7 +88,7 @@
                             <li><a href="menu.html">Menu</a></li>
                             <li><a href="login.html">Log In</a></li>
                             <li><a>Sign Up</a></li>
-                        </ul>        
+                        </ul>
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -108,7 +108,7 @@
                         </div>
                       </div>
                 </div>
-                <div class="col-lg-4  col-xs-12">
+                <div class="col-lg-4 col-xs-12">
                     <div class="left-content">
                         <div class="inner-content" style="color: white; margin-top: 40px;">
                             <h3>Sign Up</h3><br>
