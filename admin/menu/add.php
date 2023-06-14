@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Price (RM)*</label>
-                                    <input class="form-control" id="price" type="text" required name="price" pattern="^\d+(\.\d{1,2})?$" title="Please enter a number with up to two decimal places" value="<?php echo $row['price']; ?>">
+                                    <input class="form-control" id="price" type="text" required name="price" pattern="^\d+(\.\d{1,2})?$" title="Please enter a number with up to two decimal places">
                                 </div>
                                 <?php 
                                     $targetFilePath = 'NULL';
@@ -101,16 +101,16 @@
                                         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                                         if (!in_array($extension, $allowedExtensions)) {
                                             echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
-                                            exit;
+                                            exit();
                                         }
-                                        if ($file['size'] > $maxFileSize) {
+                                        else if ($file['size'] > $maxFileSize) {
                                             echo "File size exceeds the limit of 2MB.";
-                                            exit;
+                                            exit();
+                                        } else {
+                                            $targetDirectory = 'assets/uploads/';
+                                            $targetFilePath = $targetDirectory . basename($file['name']);
+                                            move_uploaded_file($file['tmp_name'], '../../'.$targetFilePath);
                                         }
-
-                                        $targetDirectory = 'assets/uploads/';
-                                        $targetFilePath = $targetDirectory . basename($file['name']);
-                                        move_uploaded_file($file['tmp_name'], $targetFilePath);
                                     } 
                                     if(isset($_POST['menu_id']) && isset($_POST['menu_name']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
                                         $menu_id = $_POST['menu_id'];
@@ -123,7 +123,7 @@
                                         $result = $conn->query($query);
                                                 
                                         if ($result) {
-                                            header("Location: view.php");
+                                            echo '<script>window.location.href = "view.php";</script>';
                                             exit();
                                         } else {
                                             echo "Error executing INSERT query: " . $conn->error;

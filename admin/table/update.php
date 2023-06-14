@@ -97,15 +97,14 @@
                                         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                                         if (!in_array($extension, $allowedExtensions)) {
                                             echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
-                                            exit;
                                         }
-                                        if ($file['size'] > $maxFileSize) {
+                                        else if ($file['size'] > $maxFileSize) {
                                             echo "File size exceeds the limit of 2MB.";
-                                            exit;
-                                        }
-
-                                        $targetDirectory = 'assets/uploads/';
-                                        $targetFilePath = $targetDirectory . basename($file['name']);
+                                        } else {
+                                            $targetDirectory = 'assets/uploads/';
+                                            $targetFilePath = $targetDirectory . basename($file['name']);
+                                            move_uploaded_file($file['tmp_name'], '../'.$targetFilePath);
+                                        }  
                                     }
                                     if(isset($_POST['name']) && isset($_POST['number'])) {
                                         $id = $_POST['id'];
@@ -116,7 +115,7 @@
                                         $result = $conn->query($query);
                                                 
                                         if ($result) {
-                                            header("Location: view.php");
+                                            echo '<script>window.location.href = "view.php";</script>';
                                             exit();
                                         } else {
                                             echo "Error executing UPDATE query: " . $conn->error;

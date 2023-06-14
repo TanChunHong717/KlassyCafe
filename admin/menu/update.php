@@ -10,7 +10,7 @@
             exit();
         }
 
-        $query = "SELECT * FROM `table` WHERE table_id = ". ($_GET['id'] ?? $_POST['id']);
+        $query = "SELECT * FROM `menu` WHERE menu_id = ". ($_GET['id'] ?? $_POST['id']);
         $result = $conn->query($query);
         $row = $result->fetch_assoc();
     ?>
@@ -96,7 +96,7 @@
                                         <input class="form-control" id="price" type="text" required name="price" pattern="^\d+(\.\d{1,2})?$" title="Please enter a number with up to two decimal places" value="<?php echo $row['price']; ?>">
                                     </div>
                                     <?php 
-                                        $targetFilePath = $row['table_image_path'];
+                                        $targetFilePath = $row['menu_image_path'];
                                         if(isset($_FILES['customFile'])) {
                                             $file = $_FILES['customFile'];
                                             $allowedExtensions = ['jpg', 'jpeg', 'png'];
@@ -105,15 +105,16 @@
                                             $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                                             if (!in_array($extension, $allowedExtensions)) {
                                                 echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
-                                                exit;
+                                                exit();
                                             }
-                                            if ($file['size'] > $maxFileSize) {
+                                            else if ($file['size'] > $maxFileSize) {
                                                 echo "File size exceeds the limit of 2MB.";
-                                                exit;
+                                                exit();
+                                            } else {
+                                                $targetDirectory = 'assets/uploads/';
+                                                $targetFilePath = $targetDirectory . basename($file['name']);
+                                                move_uploaded_file($file['tmp_name'], '../../'.$targetFilePath);
                                             }
-
-                                            $targetDirectory = 'assets/uploads/';
-                                            $targetFilePath = $targetDirectory . basename($file['name']);
                                         }
                                         if(isset($_POST['menu_name']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
                                             $menu_id = $_POST['id'];
@@ -126,7 +127,7 @@
                                             $result = $conn->query($query);
                                                     
                                             if ($result) {
-                                                header("Location: view.php");
+                                                echo '<script>window.location.href = "view.php";</script>';
                                                 exit();
                                             } else {
                                                 echo "Error executing UPDATE query: " . $conn->error;

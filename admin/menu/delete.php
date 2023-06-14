@@ -11,8 +11,8 @@
     }
 
     
-    $table_id = $_GET['id'];
-    $query = "DELETE FROM `menu` WHERE menu_id = '$menu_id'";
+    $menu_id = $_GET['id'];
+    $query = "DELETE FROM `menu` WHERE menu_id = $menu_id";
     $result = $conn->query($query);
     
     header("Location: view.php");

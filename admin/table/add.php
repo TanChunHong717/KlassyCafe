@@ -91,14 +91,14 @@
                                             echo "Invalid file extension. Allowed extensions: " . implode(', ', $allowedExtensions);
                                             exit;
                                         }
-                                        if ($file['size'] > $maxFileSize) {
+                                        else if ($file['size'] > $maxFileSize) {
                                             echo "File size exceeds the limit of 2MB.";
                                             exit;
+                                        } else {
+                                            $targetDirectory = 'assets/uploads/';
+                                            $targetFilePath = $targetDirectory . basename($file['name']);
+                                            move_uploaded_file($file['tmp_name'], '../'.$targetFilePath);
                                         }
-
-                                        $targetDirectory = 'assets/uploads/';
-                                        $targetFilePath = $targetDirectory . basename($file['name']);
-                                        move_uploaded_file($file['tmp_name'], $targetFilePath);
                                     } 
                                     if(isset($_POST['name']) && isset($_POST['number'])) {
                                         $name = $_POST['name'];
@@ -108,7 +108,7 @@
                                         $result = $conn->query($query);
                                                 
                                         if ($result) {
-                                            header("Location: view.php");
+                                            echo '<script>window.location.href = "view.php";</script>';
                                             exit();
                                         } else {
                                             echo "Error executing INSERT query: " . $conn->error;
