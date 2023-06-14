@@ -97,7 +97,7 @@
                                         } else {
                                             $targetDirectory = 'assets/uploads/';
                                             $targetFilePath = $targetDirectory . basename($file['name']);
-                                            move_uploaded_file($file['tmp_name'], '../'.$targetFilePath);
+                                            move_uploaded_file($file['tmp_name'], '../../'.$targetFilePath);
                                         }
                                     } 
                                     if(isset($_POST['name']) && isset($_POST['number'])) {
