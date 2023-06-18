@@ -74,6 +74,10 @@
                             <h3>New Reservation</h3><br>
                             <form action="create_booking.php" method="post">
                                 <div class="form-group">
+                                    <label for="date">Date*</label>
+                                    <input class="form-control" id="date" type="date" required name="date">
+                                </div>
+                                <div class="form-group">
                                     <label for="time">Time*</label>
                                     <input class="form-control" id="time" type="time" required name="time">
                                 </div>
@@ -88,29 +92,24 @@
                                             while ($row = $result->fetch_assoc()) {
                                                 echo '<option value="'.$row['table_id'].'">'.$row['table_name'].'</option>';
                                             }
-
-                                            $conn->close();
                                         ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="menu">Menu</label>
-                                    <select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">
-                                        <?php
+                                    <select class="selectpicker" multiple data-live-search="true" id="menu" name="menu[]">
+                                        <?php   
+                                            // Query the database to get the menu items
+                                            $query = "SELECT * FROM menu";
+                                            $result = $conn->query($query);
 
-                                        // Query the database to get the menu items
-                                        $query = "SELECT * FROM menu";
-                                        $result = $conn->query($query);
+                                            // Output the menu items as options in a select element
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<option value="'.$row['menu_id'].'">'.$row['menu_name'].'</option>';
+                                            }
 
-                                        // Output the menu items as options in a select element
-                                        echo '<select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">';
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<option value="'.$row['menu_id'].'">'.$row['menu_name'].'</option>';
-                                        }
-                                        echo '</select>';
-
-                                        // Close the database connection
-                                        $conn->close();
+                                            // Close the database connection
+                                            $conn->close();
                                         ?>
                                     </select>
                                 </div>
