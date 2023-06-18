@@ -1,7 +1,6 @@
 <?php
-
+    include "config/database.php";
     require_once("customer_session_validation.php")
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +58,7 @@
                             <h4>KlassyCafe</h4>
                             <h6>THE BEST EXPERIENCE</h6>
                             <div class="main-white-button scroll-to-section">
-                                <a href="new-booking.html">Book A Table</a>
+                                <a href="new-booking.php">Book A Table</a>
                             </div>
                         </div>
                     </div>
@@ -93,41 +92,32 @@
                                 <th scope="col">Time</th>
                                 <th scope="col">Table</th>
                                 <th scope="col">Menu</th>
-                                <th></th>
-                                <th></th>
+                                <th scope="col">Amount(RM)</th>
+                                <th scope="col">Status</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                    //get all booking from database
-                                    // assuming you have already established a database connection
-                                    // and have stored the user id in a variable called $user_id
+                                    $userid=$_SESSION["user_id"];
+                                    $query = "SELECT `order`.order_id, user_id, order_date, table_name, `status`, order_amount,GROUP_CONCAT(menu_name) AS menu 
+                                    FROM `order` 
+                                    JOIN `table` USING (table_id) 
+                                    JOIN contain USING (order_id) 
+                                    JOIN menu USING (menu_id) 
+                                    WHERE `order`.user_id = ".$userid."
+                                    GROUP BY order_id";
+                                    $result = $conn->query($query);
 
-                                    // prepare the SQL statement
-                                    $sql = "SELECT * FROM bookings WHERE user_id = :user_id";
-
-                                    // prepare the statement
-                                    $stmt = $pdo->prepare($sql);
-
-                                    // bind the user id parameter
-                                    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
-                                    // execute the statement
-                                    $stmt->execute();
-
-                                    // fetch all the results as an associative array
-                                    $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                    // loop through the bookings and output them in the table
-                                    foreach ($bookings as $booking) {
-                                        echo "<tr>";
-                                        echo "<th scope='row'>" . $booking['id'] . "</th>";
-                                        echo "<td>" . $booking['time'] . "</td>";
-                                        echo "<td>" . $booking['table'] . "</td>";
-                                        echo "<td>" . $booking['menu'] . "</td>";
-                                        echo "<td><a class='btn btn-outline-secondary'>Update</a></td>";
-                                        echo "<td><a class='btn btn-outline-secondary'>Cancel</a></td>";
-                                        echo "</tr>";
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<tr>
+                                        <td><input type="checkbox" name="checkboxes[]" value="'.$row['order_id'].'"></td>
+                                        <td>'.$row['order_date'].'</td>
+                                        <td>'.$row['table_name'].'</td>
+                                        <td>'.$row['menu'].'</td>
+                                        <td>'.$row['order_amount'].'</td>
+                                        <td><span>'.$row['status'].'</span></td>
+                                        </tr>
+                                        ';
                                     }
                                 ?>
                             </tbody>
