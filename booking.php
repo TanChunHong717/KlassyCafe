@@ -98,37 +98,38 @@
                               </tr>
                             </thead>
                             <tbody>
-                                //get all booking from database
-                                // assuming you have already established a database connection
-                                // and have stored the user id in a variable called $user_id
+                                <?php
+                                    //get all booking from database
+                                    // assuming you have already established a database connection
+                                    // and have stored the user id in a variable called $user_id
 
-                                // prepare the SQL statement
-                                $sql = "SELECT * FROM bookings WHERE user_id = :user_id";
+                                    // prepare the SQL statement
+                                    $sql = "SELECT * FROM bookings WHERE user_id = :user_id";
 
-                                // prepare the statement
-                                $stmt = $pdo->prepare($sql);
+                                    // prepare the statement
+                                    $stmt = $pdo->prepare($sql);
 
-                                // bind the user id parameter
-                                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                                    // bind the user id parameter
+                                    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
-                                // execute the statement
-                                $stmt->execute();
+                                    // execute the statement
+                                    $stmt->execute();
 
-                                // fetch all the results as an associative array
-                                $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    // fetch all the results as an associative array
+                                    $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                                // loop through the bookings and output them in the table
-                                foreach ($bookings as $booking) {
-                                    echo "<tr>";
-                                    echo "<th scope='row'>" . $booking['id'] . "</th>";
-                                    echo "<td>" . $booking['time'] . "</td>";
-                                    echo "<td>" . $booking['table'] . "</td>";
-                                    echo "<td>" . $booking['menu'] . "</td>";
-                                    echo "<td><a class='btn btn-outline-secondary'>Update</a></td>";
-                                    echo "<td><a class='btn btn-outline-secondary'>Cancel</a></td>";
-                                    echo "</tr>";
-                                }
-
+                                    // loop through the bookings and output them in the table
+                                    foreach ($bookings as $booking) {
+                                        echo "<tr>";
+                                        echo "<th scope='row'>" . $booking['id'] . "</th>";
+                                        echo "<td>" . $booking['time'] . "</td>";
+                                        echo "<td>" . $booking['table'] . "</td>";
+                                        echo "<td>" . $booking['menu'] . "</td>";
+                                        echo "<td><a class='btn btn-outline-secondary'>Update</a></td>";
+                                        echo "<td><a class='btn btn-outline-secondary'>Cancel</a></td>";
+                                        echo "</tr>";
+                                    }
+                                ?>
                             </tbody>
                           </table>
                     </div>
