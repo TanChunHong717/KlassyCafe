@@ -96,12 +96,22 @@
                                 <div class="form-group">
                                     <label for="menu">Menu</label>
                                     <select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">
-                                        <option value="1">Fresh Chicken Salad</option>
-                                        <option value="2">Eggs Omelette</option>
-                                        <option value="3">Orange Juice</option>
-                                        <option value="4">Dollma Pire</option>
-                                        <option value="5">Fruit Salad</option>
-                                        <option value="6">Omelette & Cheese</option>
+                                        <?php
+
+                                        // Query the database to get the menu items
+                                        $query = "SELECT * FROM menu";
+                                        $result = $conn->query($query);
+
+                                        // Output the menu items as options in a select element
+                                        echo '<select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">';
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value="'.$row['menu_id'].'">'.$row['menu_name'].'</option>';
+                                        }
+                                        echo '</select>';
+
+                                        // Close the database connection
+                                        $conn->close();
+                                        ?>
                                     </select>
                                 </div>
                                 <input class="btn btn-light" type="submit" value="Submit">

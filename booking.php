@@ -1,7 +1,7 @@
-<?php 
-    
+<?php
+
     require_once("customer_session_validation.php")
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,14 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <title>Booking</title>
-    
+
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
-<body>        
+<body>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -40,7 +40,7 @@
                         <li><a href="booking.php">Booking</a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="logout.php">Log out</a></li>
-                        </ul>        
+                        </ul>
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -98,46 +98,37 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>19:00 3 May 2023</td>
-                                <td>A1</td>
-                                <td>Fresh Chicken Salad, Eggs Omelette, Orange Juice</td>
-                                <td></td>
-                                <td>Cancel</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>21:00 4 May 2023</td>
-                                <td>A3</td>
-                                <td>Dollma Pire, Orange Juice</td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>19:00 5 May 2023</td>
-                                <td>B1</td>
-                                <td>Fresh Chicken Salad, Orange Juice</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>12:00 7 May 2023</td>
-                                <td>A1</td>
-                                <td>Omelette & Cheese, Fruit Salad</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>19:00 8 May 2023</td>
-                                <td>A3</td>
-                                <td>Eggs Omelette, Orange Juice</td>
-                                <td><a class="btn btn-outline-secondary">Update</a></td>
-                                <td><a class="btn btn-outline-secondary">Cancel</a></td>
-                              </tr>
+                                //get all booking from database
+                                // assuming you have already established a database connection
+                                // and have stored the user id in a variable called $user_id
+
+                                // prepare the SQL statement
+                                $sql = "SELECT * FROM bookings WHERE user_id = :user_id";
+
+                                // prepare the statement
+                                $stmt = $pdo->prepare($sql);
+
+                                // bind the user id parameter
+                                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+                                // execute the statement
+                                $stmt->execute();
+
+                                // fetch all the results as an associative array
+                                $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                // loop through the bookings and output them in the table
+                                foreach ($bookings as $booking) {
+                                    echo "<tr>";
+                                    echo "<th scope='row'>" . $booking['id'] . "</th>";
+                                    echo "<td>" . $booking['time'] . "</td>";
+                                    echo "<td>" . $booking['table'] . "</td>";
+                                    echo "<td>" . $booking['menu'] . "</td>";
+                                    echo "<td><a class='btn btn-outline-secondary'>Update</a></td>";
+                                    echo "<td><a class='btn btn-outline-secondary'>Cancel</a></td>";
+                                    echo "</tr>";
+                                }
+
                             </tbody>
                           </table>
                     </div>
