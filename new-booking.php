@@ -1,28 +1,35 @@
-<?php 
-    
+<?php
+    include "./config/database.php";
+    session_start();
+
     require_once("customer_session_validation.php")
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <title>New Reservation</title>
-    
+
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
-<body>        
+
+<body>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -36,12 +43,12 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="menu.php">Menu</a></li>
-                        <li><a href="booking.php">Booking</a></li>
-                        <li><a href="profile.php">Profile</a></li>
-                        <li><a href="logout.php">Log out</a></li>
-                        </ul>        
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="menu.php">Menu</a></li>
+                            <li><a href="booking.php">Booking</a></li>
+                            <li><a href="profile.php">Profile</a></li>
+                            <li><a href="logout.php">Log out</a></li>
+                        </ul>
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -59,35 +66,52 @@
                         <div class="img-fill">
                             <img src="assets/images/slide-01.jpg" alt="">
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class="col-lg-4  col-xs-12">
+                <div class="col-lg-4 col-xs-12">
                     <div class="left-content">
                         <div class="inner-content" style="color: white;">
                             <h3>New Reservation</h3><br>
-                            <form>
+                            <form action="create_booking.php" method="post">
                                 <div class="form-group">
                                     <label for="time">Time*</label>
                                     <input class="form-control" id="time" type="time" required name="time">
                                 </div>
                                 <div class="form-group">
                                     <label for="table">Table*</label>
-                                    <select class="custom-select" id="table" required>
+                                    <select class="custom-select" id="table" required name="table">
                                         <option selected>Open this to select table</option>
-                                        <option value="1">A1</option>
-                                        <option value="2">B1</option>
-                                        <option value="3">B2</option>
+                                        <?php
+                                            $query = "SELECT * FROM `table`";
+                                            $result = $conn->query($query);
+
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<option value="'.$row['table_id'].'">'.$row['table_name'].'</option>';
+                                            }
+
+                                            $conn->close();
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="menu">Menu</label>
-                                    <select class="selectpicker" multiple data-live-search="true" id="menu">
-                                        <option value="1">Fresh Chicken Salad</option>
-                                        <option value="2">Eggs Omelette</option>
-                                        <option value="3">Orange Juice</option>
-                                        <option value="4">Dollma Pire</option>
-                                        <option value="5">Fruit Salad</option>
-                                        <option value="6">Omelette & Cheese</option>
+                                    <select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">
+                                        <?php
+
+                                        // Query the database to get the menu items
+                                        $query = "SELECT * FROM menu";
+                                        $result = $conn->query($query);
+
+                                        // Output the menu items as options in a select element
+                                        echo '<select class="selectpicker" multiple data-live-search="true" id="menu" name="menu">';
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo '<option value="'.$row['menu_id'].'">'.$row['menu_name'].'</option>';
+                                        }
+                                        echo '</select>';
+
+                                        // Close the database connection
+                                        $conn->close();
+                                        ?>
                                     </select>
                                 </div>
                                 <input class="btn btn-light" type="submit" value="Submit">
@@ -106,12 +130,12 @@
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
                     <div class="right-text-content">
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -131,6 +155,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </body>
+
 </html>
