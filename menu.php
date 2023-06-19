@@ -300,7 +300,7 @@
                     <div class="left-text-content">
                         <p>© Copyright Klassy Cafe Co.
                         
-                        <br>Design: TemplateMo</p>
+                        
                     </div>
                 </div>
             </div>
