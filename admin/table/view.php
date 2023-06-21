@@ -41,7 +41,7 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="../index.php">Admin Home</a></li>
-                            <li><a href="../menu/admin-menu.php">Menu</a></li>
+                            <li><a href="../menu/view.php">Menu</a></li>
                             <li><a>Table</a></li>
                             <li><a href="../user/view.php">User</a></li>
                             <li><a href="../../logout.php">logout</a></li>

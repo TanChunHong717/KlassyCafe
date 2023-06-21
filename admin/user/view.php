@@ -40,7 +40,7 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="../index.php">Admin Home</a></li>
-                            <li><a href="../menu/admin-menu.php">Menu</a></li>
+                            <li><a href="../menu/view.php">Menu</a></li>
                             <li><a href="../table/view.php">Table</a></li>
                             <li><a>User</a></li>
                             <li><a href="../../logout.php">Logout</a></li>

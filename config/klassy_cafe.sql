@@ -58,13 +58,6 @@ CREATE TABLE IF NOT EXISTS `klassy_cafe`.`table` (
   PRIMARY KEY (`table_id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `klassy_cafe`.`booking` (
-  `booking_id` INT NOT NULL AUTO_INCREMENT,
-  `time` VARCHAR(255) NOT NULL,
-  `table` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`booking_id`))
-ENGINE = InnoDB;
-
 -- -----------------------------------------------------
 -- Table `klassy_cafe`.`user`
 -- -----------------------------------------------------
