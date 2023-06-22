@@ -22,4 +22,5 @@
         } else {
             $errorMsg = "Failed to delete the account. Please try again.";
         }
-    
+
+?>
